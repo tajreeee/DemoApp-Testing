@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ProjectLaunch Onboarding</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.9.6/lottie.min.js"></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+  html, body { height: 100%; overflow: hidden; background: #0d1117; }
+
+  /* Slider container */
+  .slider {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    transition: transform 0.8s ease-in-out;
+    touch-action: pan-y;
+  }
+
+  /* Each slide */
+  .slide {
+    min-width: 100vw;
+    height: 100vh;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    opacity: 0.3;
+    transform: scale(0.98);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .slide.active {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  /* Background gradients for each slide */
+  .slide1 {
+    background: radial-gradient(circle at top left, #101820, #0d1117);
+  }
+  .slide2 {
+    background: radial-gradient(circle at top right, #1a2230, #0d1117);
+  }
+  .slide3 {
+    background: radial-gradient(circle at bottom, #141b29, #0d1117);
+  }
+
+  /* Lottie container */
+  .lottie-container {
+    width: 420px;
+    height: 420px;
+    margin-bottom: 25px;
+  }
+
+  h1 {
+    font-size: 2.2em;
+    font-weight: 600;
+    margin-bottom: 15px;
+    letter-spacing: 0.5px;
+  }
+
+  p {
+    font-size: 1.1em;
+    color: #d0d0d0;
+    max-width: 350px;
+    line-height: 1.6;
+  }
+
+  /* Buttons */
+  .next-btn, .get-started-btn {
+    margin-top: 45px;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 40px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .next-btn {
+    background: #2382ff;
+    color: #fff;
+  }
+
+  .next-btn:hover {
+    background: #2f95ff;
+    transform: translateY(-2px);
+  }
+
+  .get-started-btn {
+    background: linear-gradient(90deg, #2382ff, #4ade80);
+    color: #fff;
+    font-weight: 600;
+    box-shadow: 0 0 20px rgba(35,130,255,0.4);
+  }
+
+  .get-started-btn:hover {
+    transform: translateY(-3px) scale(1.02);
+  }
+
+  /* Dots navigation */
+  .dots {
+    position: absolute;
+    bottom: 35px;
+    display: flex;
+    gap: 10px;
+  }
+
+  .dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #444;
+    transition: all 0.3s ease;
+  }
+
+  .dot.active {
+    background: #2382ff;
+    transform: scale(1.3);
+    box-shadow: 0 0 8px #2382ff;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .lottie-container { width: 320px; height: 320px; }
+    h1 { font-size: 1.8em; }
+    p { font-size: 1em; max-width: 280px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="slider">
+  <div class="slide slide1 active">
+    <div class="lottie-container" id="lottie1"></div>
+    <h1>Plan Smarter, Launch Faster</h1>
+    <p>Organize your project goals and milestones with precision and clarity.</p>
+    <button class="next-btn" onclick="nextSlide()">Next →</button>
+  </div>
+
+  <div class="slide slide2">
+    <div class="lottie-container" id="lottie2"></div>
+    <h1>Work Together, Build Better</h1>
+    <p>Collaborate in real-time with teammates and mentors efficiently.</p>
+    <button class="next-btn" onclick="nextSlide()">Next →</button>
+  </div>
+
+  <div class="slide slide3">
+    <div class="lottie-container" id="lottie3"></div>
+    <h1>Launch Your Success Story</h1>
+    <p>Bring your ideas to life and share them with the world confidently.</p>
+    <button class="get-started-btn" onclick="goToLogin()">Get Started</button>
+  </div>
+</div>
+
+<!-- <div class="dots">
+  <div class="dot active" onclick="goToSlide(0)"></div>
+  <div class="dot" onclick="goToSlide(1)"></div>
+  <div class="dot" onclick="goToSlide(2)"></div>
+</div> -->
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  const dots = document.querySelectorAll('.dot');
+  let currentSlide = 0;
+
+  function showSlide(index) {
+    slides.forEach((s, i) => s.classList.toggle('active', i === index));
+    document.querySelector('.slider').style.transform = `translateX(-${index * 100}vw)`;
+    dots.forEach((d, i) => d.classList.toggle('active', i === index));
+  }
+
+  function nextSlide() {
+    if (currentSlide < slides.length - 1) {
+      currentSlide++;
+      showSlide(currentSlide);
+    }
+  }
+
+  function goToSlide(index) {
+    currentSlide = index;
+    showSlide(index);
+  }
+
+  function goToLogin() {
+    window.location.href = 'login.html'; // change to your actual login page
+  }
+
+  /* Swipe Support */
+  let startX = 0;
+  const slider = document.querySelector('.slider');
+  slider.addEventListener('touchstart', e => startX = e.touches[0].clientX);
+  slider.addEventListener('touchend', e => {
+    const diff = startX - e.changedTouches[0].clientX;
+    if (diff > 50) nextSlide();
+    if (diff < -50 && currentSlide > 0) { currentSlide--; showSlide(currentSlide); }
+  });
+
+  /* Lottie Animations - large, realistic ones */
+  const animations = [
+    { el: 'lottie1', path: 'https://assets7.lottiefiles.com/packages/lf20_t24tpvcu.json' }, // planning
+    { el: 'lottie2', path: 'https://assets2.lottiefiles.com/packages/lf20_4kx2q32n.json' }, // teamwork
+    { el: 'lottie3', path: 'https://assets3.lottiefiles.com/packages/lf20_jtbfg2nb.json' }  // rocket
+  ];
+
+  animations.forEach(a => {
+    lottie.loadAnimation({
+      container: document.getElementById(a.el),
+      renderer: 'svg',
+      loop: true,
+      autoplay: true,
+      path: a.path
+    });
+  });
+</script>
+</body>
+</html>
+
+
+

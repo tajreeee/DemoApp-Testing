@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Email Verification - TechWeave</title>
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+
+<!-- Lottie Player -->
+<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+
+<style>
+  * {
+    box-sizing: border-box;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+  }
+
+  .verify-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #fff;
+    padding: 50px 40px;
+    border-radius: 20px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+  }
+
+  .verify-container lottie-player {
+    width: 150px;
+    margin-bottom: 30px;
+  }
+
+  h2 {
+    font-size: 28px;
+    color: #1e3c72;
+    font-weight: 700;
+    margin-bottom: 15px;
+  }
+
+  p {
+    font-size: 16px;
+    color: #555;
+  }
+
+  @media(max-width: 480px) {
+    .verify-container {
+      padding: 30px 20px;
+    }
+    h2 {
+      font-size: 24px;
+    }
+    p {
+      font-size: 14px;
+    }
+    .verify-container lottie-player {
+      width: 120px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="verify-container">
+  <!-- Success Lottie Animation -->
+  <lottie-player
+    src="https://assets2.lottiefiles.com/packages/lf20_jbrw3hcz.json"
+    background="transparent"
+    speed="1"
+    loop
+    autoplay>
+  </lottie-player>
+
+  <h2>Email Verified Successfully!</h2>
+  <p>Redirecting to your dashboard...</p>
+</div>
+
+<script>
+  // Auto redirect after 2 seconds
+  setTimeout(() => {
+    window.location.href = "dashboard.html";
+  }, 5000);
+</script>
+
+</body>
+</html>
